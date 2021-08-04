@@ -16,12 +16,21 @@ type (
 	}
 )
 
+func (c *Country) UnmarshalJSON(data []byte) error {
+	var name string
+	if err := json.Unmarshal(data, &name); err != nil {
+		return err
+	}
+
+	c.Name = name
+
+	return nil
+}
+
 func main() {
 	data := `{
 		"id": 1,
-		"country": {
-			"name": "US"
-		}
+		"country": "US"
 	}`
 
 	fmt.Println("Unmarshalling string data:\n", data)
@@ -31,6 +40,5 @@ func main() {
 		panic("unable to unmarshal data")
 	}
 
-	fmt.Println(person)
-
+	fmt.Println("Deserialized Person:\n", person)
 }
