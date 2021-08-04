@@ -1,0 +1,1 @@
+To run this repo, simply `go run main.go` from the root of the source tree.
